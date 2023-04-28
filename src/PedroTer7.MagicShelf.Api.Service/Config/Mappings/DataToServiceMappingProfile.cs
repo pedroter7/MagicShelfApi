@@ -9,7 +9,8 @@ namespace PedroTer7.MagicShelf.Api.Service.Config.Mappings
         public DataToServiceMappingProfile()
         {
             CreateMap<ItemOutDto, ItemEnumerationDto>();
-            CreateMap<CommentOutDto, ItemCommentDto>();
+            CreateMap<CommentOutDto, ItemCommentDto>()
+                .ForMember(sDto => sDto.PostedDate, mo => mo.MapFrom(dDto => dDto.CreatedTime));
         }
     }
 }

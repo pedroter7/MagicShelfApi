@@ -24,7 +24,11 @@ namespace PedroTer7.MagicShelf.Api.Data.Repositories.Implementations
         {
             var item = await GetItemThrowsIfNotFound(itemId);
             var commentEntity = _mapper.Map<Comment>(comment);
+            commentEntity.ItemId = item.Id;
+            commentEntity.Item = item;
             commentEntity.CreatedDate = DateTime.Now;
+            if (item.Comments is null)
+                item.Comments = new List<Comment>();
             item.Comments.Add(commentEntity);
             _dbContext.Items.Update(item);
             await _dbContext.SaveChangesAsync();
@@ -48,7 +52,8 @@ namespace PedroTer7.MagicShelf.Api.Data.Repositories.Implementations
         public async Task<ICollection<CommentOutDto>> GetCommentsForItem(long itemId)
         {
             var item = await GetItemThrowsIfNotFound(itemId);
-            if (item.Comments.Count == 0)
+            await _dbContext.Entry(item).Collection(i => i.Comments).LoadAsync();
+            if (item.Comments is null || item.Comments.Count == 0)
                 throw new EntityNotFoundException("Comment", $"comments for item with id {itemId}");
 
             return _mapper.Map<ICollection<CommentOutDto>>(item.Comments);

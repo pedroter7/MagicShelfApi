@@ -83,7 +83,9 @@ namespace PedroTer7.MagicShelf.Api.Service.Services.Implementations
             try
             {
                 var items = await _itemRepository.GetAll();
-                var itemsFiltered = items.Where(i => i.Name.Contains(keyword) || i.Description.Contains(keyword));
+                var itemsFiltered = items.Where(
+                    i => i.Name.Contains(keyword, StringComparison.InvariantCultureIgnoreCase) 
+                    || i.Description.Contains(keyword, StringComparison.InvariantCultureIgnoreCase));
                 if (!itemsFiltered.Any())
                     throw new NoItemOnShelfSatisfiesConditionException($"Keyword {keyword} in name or description");
 

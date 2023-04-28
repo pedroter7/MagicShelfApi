@@ -1,6 +1,6 @@
-﻿namespace PedroTer7.MagicShelf.Api.Service.Dtos
+﻿namespace PedroTer7.MagicShelf.Api.ViewModels.Out
 {
-    public class ItemCommentDto
+    public class ItemCommentOutViewModel
     {
         public long Id { get; set; }
         public string Author { get; set; } = null!;

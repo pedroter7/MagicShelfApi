@@ -15,12 +15,12 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PedroTer7.MagicShelf.Api.Data\PedroTer7.MagicShelf.Api.Data.csproj" />
-    <ProjectReference Include="..\PedroTer7.MagicShelf.Api.Service\PedroTer7.MagicShelf.Api.Service.csproj" />
+    <ProjectReference Include="..\PedroTer7.MagicShelf.Api.CrossCutting\PedroTer7.MagicShelf.Api.CrossCutting.csproj" />
   </ItemGroup>
 
 </Project>
