@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PedroTer7.MagicShelf.Api.Data\PedroTer7.MagicShelf.Api.Data.csproj" />
+    <ProjectReference Include="..\PedroTer7.MagicShelf.Api.Service\PedroTer7.MagicShelf.Api.Service.csproj" />
   </ItemGroup>
 
 </Project>

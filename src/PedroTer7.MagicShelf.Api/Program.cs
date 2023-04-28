@@ -1,9 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using PedroTer7.MagicShelf.Api.Data.DataContexts;
+using PedroTer7.MagicShelf.Api.Service.Config.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<ShelfOptions>(
+    builder.Configuration.GetSection(ShelfOptions.Key));
+
+// TODO detach presentation layer dependency from data layer
 var connectionString = builder.Configuration.GetSection("ConnectionStrings")["SqlServerDb"];
 builder.Services.AddDbContext<MagicShelfDbContext>(opt =>
 {
