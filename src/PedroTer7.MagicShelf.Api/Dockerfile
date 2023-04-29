@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["MagicShelfApi/MagicShelfApi.csproj", "MagicShelfApi/"]
-RUN dotnet restore "MagicShelfApi/MagicShelfApi.csproj"
+COPY ["src/PedroTer7.MagicShelf.Api/PedroTer7.MagicShelf.Api.csproj", "/src/PedroTer7.MagicShelf.Api/"]
+RUN dotnet restore "/src/PedroTer7.MagicShelf.Api/PedroTer7.MagicShelf.Api.csproj"
 COPY . .
-WORKDIR "/src/MagicShelfApi"
-RUN dotnet build "MagicShelfApi.csproj" -c Release -o /app/build
+WORKDIR "/src/PedroTer7.MagicShelf.Api"
+RUN dotnet build "PedroTer7.MagicShelf.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "MagicShelfApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "PedroTer7.MagicShelf.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "MagicShelfApi.dll"]
+ENTRYPOINT ["dotnet", "PedroTer7.MagicShelf.Api.dll"]
