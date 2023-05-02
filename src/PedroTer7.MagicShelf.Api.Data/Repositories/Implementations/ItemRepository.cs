@@ -42,7 +42,8 @@ namespace PedroTer7.MagicShelf.Api.Data.Repositories.Implementations
 
         public async Task<ICollection<ItemOutDto>> GetAll()
         {
-            var items = await _dbContext.Items.ToListAsync();
+            var items = await _dbContext.Items.Include(i => i.Comments)
+                .ToListAsync();
             if (items is null)
                 throw new EntityNotFoundException("Item", "all entities");
 
@@ -52,7 +53,7 @@ namespace PedroTer7.MagicShelf.Api.Data.Repositories.Implementations
         public async Task<ICollection<CommentOutDto>> GetCommentsForItem(long itemId)
         {
             var item = await GetItemThrowsIfNotFound(itemId);
-            await _dbContext.Entry(item).Collection(i => i.Comments).LoadAsync();
+            await LazyLoadCommentsForItem(item);
             if (item.Comments is null || item.Comments.Count == 0)
                 throw new EntityNotFoundException("Comment", $"comments for item with id {itemId}");
 
@@ -62,6 +63,7 @@ namespace PedroTer7.MagicShelf.Api.Data.Repositories.Implementations
         public async Task<ItemOutDto> GetItem(long id)
         {
             var itemEntity = await GetItemThrowsIfNotFound(id);
+            await LazyLoadCommentsForItem(itemEntity);
             return _mapper.Map<ItemOutDto>(itemEntity);
         }
 
@@ -93,6 +95,12 @@ namespace PedroTer7.MagicShelf.Api.Data.Repositories.Implementations
             if (item is null)
                 throw new EntityNotFoundException("Item", $"Id = {id}");
             return item;
+        }
+
+        private Task LazyLoadCommentsForItem(Item itemEntity)
+        {
+            return _dbContext.Entry(itemEntity)
+                .Collection(i => i.Comments).LoadAsync();
         }
     }
 }
