@@ -15,7 +15,7 @@ namespace PedroTer7.MagicShelf.Api.ViewModels.In
         public string Name { get; set; } = null!;
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "An item must have some content")]
-        [MaxLength(5000, ErrorMessage = "Cannot store items with more than 5000 chars in content")]
+        [MaxLength(50000, ErrorMessage = "Cannot store items with more than 50000 chars in content")]
         public string Content { get; set; } = null!; 
     }
 }

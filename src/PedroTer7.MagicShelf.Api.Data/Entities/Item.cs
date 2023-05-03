@@ -6,7 +6,7 @@ namespace PedroTer7.MagicShelf.Api.Data.Entities
     [Table("Items")]
     public class Item : EntityBase
     {
-        [MaxLength(5000, ErrorMessage = "The item is too big for the shelf")]
+        [MaxLength(50000, ErrorMessage = "The item is too big for the shelf")]
         public string Content { get; set; } = null!;
 
         [MaxLength(100)]
