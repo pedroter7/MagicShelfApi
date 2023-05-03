@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PedroTer7.MagicShelf.Api.Data.DataContexts;
 
@@ -11,9 +12,11 @@ using PedroTer7.MagicShelf.Api.Data.DataContexts;
 namespace PedroTer7.MagicShelf.Api.Migrations
 {
     [DbContext(typeof(MagicShelfDbContext))]
-    partial class MagicShelfDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230503021405_IncreaseItemContentMaxLengthTo50K")]
+    partial class IncreaseItemContentMaxLengthTo50K
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
