@@ -13,7 +13,8 @@ namespace PedroTer7.MagicShelf.Api.Data.Config.Mappings
                 .ForMember(dto => dto.NumberCommentsAbout, mo => mo.MapFrom(e => e.Comments.Count));
 
             CreateMap<Comment, CommentOutDto>()
-                .ForMember(dto => dto.Text, mo => mo.MapFrom(e => e.Details));
+                .ForMember(dto => dto.Text, mo => mo.MapFrom(e => e.Details))
+                .ForMember(dto => dto.CreatedTime, mo => mo.MapFrom(e => e.CreatedDate));
         }
     }
 }
